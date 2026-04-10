@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B+D Argentina — Auditoría Digital Completa Q1 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #ffffff;
+  --dark: #f5f5f5;
+  --card: #fafafa;
+  --card2: #f0f0f0;
+  --border: #e0e0e0;
+  --muted: #aaaaaa;
+  --subtle: #777777;
+  --light: #444444;
+  --white: #111111;
+  --accent: #ff221c;
+  --accent2: #cc0000;
+  --green: #2e9e6b;
+  --yellow: #e6a800;
+  --red: #ff221c;
+  --orange: #F5851F;
+  --blue: #1A3A6B;
+  --neon: #B7FF00;
+  --instagram: #E1306C;
+  --facebook: #1877F2;
+  --tiktok: #010101;
+  --linkedin: #0A66C2;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; background: var(--bg); color: var(--white); font-size: 14px; }
+
+/* HEADER */
+.header { background: var(--dark); border-bottom: 2px solid var(--border); padding: 20px 32px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.logo-box { background: var(--accent); color: #fff; font-family: Georgia, serif; font-size: 28px; font-weight: bold; padding: 10px 18px; letter-spacing: 2px; border-radius: 2px; }
+.header-brand { flex: 1; }
+.header-brand h1 { font-family: Georgia, serif; font-size: 22px; font-weight: bold; color: var(--white); }
+.header-brand p { color: var(--subtle); font-size: 12px; margin-top: 2px; }
+.header-center { text-align: center; flex: 1; }
+.header-center h2 { font-family: Georgia, serif; font-size: 16px; color: var(--white); }
+.header-center p { color: var(--subtle); font-size: 12px; margin-top: 4px; }
+.header-score { text-align: right; }
+.score-circle { display: inline-block; background: var(--accent); color: #fff; font-family: Georgia, serif; font-size: 28px; font-weight: bold; width: 80px; height: 80px; border-radius: 50%; line-height: 80px; text-align: center; }
+.score-label { font-size: 11px; color: var(--subtle); margin-top: 4px; }
+
+/* NAV */
+.nav { background: var(--dark); border-bottom: 2px solid var(--border); padding: 0 32px; display: flex; overflow-x: auto; position: sticky; top: 0; z-index: 100; }
+.nav-tab { padding: 14px 16px; cursor: pointer; font-size: 13px; color: var(--subtle); border-bottom: 3px solid transparent; white-space: nowrap; transition: all .2s; user-select: none; }
+.nav-tab:hover { color: var(--accent); }
+.nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: bold; }
+
+/* SECTIONS */
+.section { display: none; padding: 32px; max-width: 1200px; margin: 0 auto; }
+.section.active { display: block; }
+.section-title { font-family: Georgia, serif; font-size: 22px; font-weight: bold; color: var(--white); margin-bottom: 6px; }
+.section-subtitle { color: var(--subtle); font-size: 13px; margin-bottom: 24px; }
+
+/* KPI CARDS */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 28px; }
+.kpi-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 18px 16px; }
+.kpi-label { font-size: 11px; color: var(--subtle); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+.kpi-value { font-family: Georgia, serif; font-size: 26px; font-weight: bold; color: var(--white); }
+.kpi-sub { font-size: 11px; margin-top: 4px; }
+.kpi-card.green { border-left: 4px solid var(--green); }
+.kpi-card.yellow { border-left: 4px solid var(--yellow); }
+.kpi-card.red { border-left: 4px solid var(--red); }
+.kpi-card.blue { border-left: 4px solid var(--blue); }
+
+/* GRID 2 COLS */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+@media(max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
+
+/* CHARTS */
+.chart-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+.chart-title { font-size: 13px; font-weight: bold; color: var(--white); margin-bottom: 14px; }
+.chart-wrap { position: relative; height: 240px; }
+.chart-wrap-tall { position: relative; height: 320px; }
+
+/* TABLE */
+.table-wrap { overflow-x: auto; margin-bottom: 24px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: var(--card2); color: var(--subtle); text-transform: uppercase; font-size: 11px; letter-spacing: .5px; padding: 10px 12px; text-align: left; border-bottom: 2px solid var(--border); }
+td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--light); }
+tr:hover td { background: var(--card2); }
+
+/* BADGE */
+.badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: bold; }
+.badge-green { background: #e6f9f0; color: var(--green); }
+.badge-yellow { background: #fff8e0; color: var(--yellow); }
+.badge-red { background: #ffe8e8; color: var(--red); }
+.badge-blue { background: #e8f0fb; color: var(--blue); }
+.badge-gray { background: var(--card2); color: var(--subtle); }
+
+/* MINI FODA */
+.foda-block { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 28px; margin-bottom: 8px; }
+@media(max-width:700px) { .foda-block { grid-template-columns: 1fr; } }
+.foda-item { border-radius: 8px; padding: 14px 16px; }
+.foda-green { background: #e6f9f0; border-left: 4px solid var(--green); }
+.foda-yellow { background: #fff8e0; border-left: 4px solid var(--yellow); }
+.foda-red { background: #ffe8e8; border-left: 4px solid var(--red); }
+.foda-item h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+.foda-green h4 { color: var(--green); }
+.foda-yellow h4 { color: var(--yellow); }
+.foda-red h4 { color: var(--red); }
+.foda-item p { font-size: 12px; color: var(--light); line-height: 1.5; }
+.foda-rec { background: var(--dark); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; font-size: 12px; color: var(--light); margin-bottom: 4px; }
+.foda-rec strong { color: var(--accent); }
+
+/* SUBTABS */
+.subtabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.subtab { padding: 7px 16px; border-radius: 20px; border: 1px solid var(--border); font-size: 12px; cursor: pointer; color: var(--subtle); background: var(--card); transition: all .2s; }
+.subtab:hover { border-color: var(--accent); color: var(--accent); }
+.subtab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.subpanel { display: none; }
+.subpanel.active { display: block; }
+
+/* ACCORDION */
+.accordion { margin-bottom: 8px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.accordion-header { background: var(--card); padding: 14px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: bold; }
+.accordion-header:hover { background: var(--card2); }
+.accordion-score { font-family: Georgia, serif; font-size: 18px; font-weight: bold; }
+.accordion-body { display: none; padding: 18px; background: #fff; border-top: 1px solid var(--border); }
+.accordion-body.open { display: block; }
+.acc-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 14px; }
+@media(max-width:700px) { .acc-grid { grid-template-columns: 1fr; } }
+.acc-col h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; color: var(--subtle); }
+.acc-col ul { padding-left: 16px; }
+.acc-col li { font-size: 12px; color: var(--light); margin-bottom: 4px; line-height: 1.5; }
+
+/* ROADMAP */
+.roadmap { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin: 24px 0; }
+@media(max-width:700px) { .roadmap { grid-template-columns: 1fr; } }
+.road-col { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+.road-col h3 { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.road-col p.road-meta { font-size: 11px; color: var(--subtle); margin-bottom: 12px; }
+.road-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+.road-num { background: var(--accent); color: #fff; font-size: 11px; font-weight: bold; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.road-num.y { background: var(--yellow); }
+.road-num.b { background: var(--blue); }
+.road-text { font-size: 12px; color: var(--light); line-height: 1.5; }
+
+/* SCORECARD FINAL */
+.score-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; padding: 10px 14px; background: var(--card); border-radius: 6px; border: 1px solid var(--border); }
+.score-row-label { flex: 1; font-size: 13px; color: var(--light); }
+.score-bar-wrap { flex: 2; background: var(--border); border-radius: 4px; height: 8px; overflow: hidden; }
+.score-bar { height: 100%; border-radius: 4px; }
+.score-row-num { font-weight: bold; font-size: 14px; width: 60px; text-align: right; }
+
+/* MATRIX */
+.matrix-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.matrix-cell { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 18px; }
+.matrix-cell h3 { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+.matrix-cell p.meta { font-size: 11px; color: var(--subtle); margin-bottom: 12px; }
+.matrix-item { font-size: 12px; color: var(--light); padding: 6px 0; border-bottom: 1px solid var(--border); }
+.matrix-item:last-child { border-bottom: none; }
+
+/* SENTIMENT */
+.sentiment-bar { display: flex; border-radius: 8px; overflow: hidden; height: 20px; margin: 12px 0; }
+.sent-pos { background: var(--green); }
+.sent-neu { background: var(--yellow); }
+.sent-neg { background: var(--red); }
+
+/* COMPETITOR LEGEND */
+.comp-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+.comp-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.comp-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+hr.divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo-box">B+D</div>
+  <div class="header-brand">
+    <h1>B+D ARGENTINA</h1>
+    <p>Especialistas en Anteojos · Est. 1972 · Dinamarca</p>
+  </div>
+  <div class="header-center">
+    <h2>Auditoría Digital Completa</h2>
+    <p>Q1 2026 — Marzo 2026 · Solo datos públicos</p>
+  </div>
+  <div class="header-score">
+    <div class="score-circle">68</div>
+    <div class="score-label">En Crecimiento · Base Sólida</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-tab active" onclick="showSection('overview',this)">Overview</div>
+  <div class="nav-tab" onclick="showSection('web',this)">Web & E-commerce</div>
+  <div class="nav-tab" onclick="showSection('social',this)">Redes Sociales</div>
+  <div class="nav-tab" onclick="showSection('pauta',this)">Pauta Digital</div>
+  <div class="nav-tab" onclick="showSection('seo',this)">SEO</div>
+  <div class="nav-tab" onclick="showSection('reputacion',this)">Reputación</div>
+  <div class="nav-tab" onclick="showSection('competidores',this)">Competidores</div>
+  <div class="nav-tab" onclick="showSection('conceptos',this)">Conceptos Clave</div>
+  <div class="nav-tab" onclick="showSection('recomendaciones',this)">Recomendaciones</div>
+  <div class="nav-tab" onclick="showSection('scorecard',this)">Scorecard Final</div>
+</nav>
+
+<!-- ===================== OVERVIEW ===================== -->
+<div id="section-overview" class="section active">
+  <div class="section-title">Overview General</div>
+  <div class="section-subtitle">Resumen ejecutivo del estado digital de B+D Argentina</div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card green">
+      <div class="kpi-label">Instagram</div>
+      <div class="kpi-value">107K</div>
+      <div class="kpi-sub" style="color:var(--green)">✅ Activo y creciente</div>
+    </div>
+    <div class="kpi-card yellow">
+      <div class="kpi-label">Facebook</div>
+      <div class="kpi-value">Global</div>
+      <div class="kpi-sub" style="color:var(--yellow)">⚠️ Página mundial integrada AR</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">Tiendas físicas</div>
+      <div class="kpi-value">10</div>
+      <div class="kpi-sub" style="color:var(--green)">✅ 9 CABA · 1 Mendoza</div>
+    </div>
+    <div class="kpi-card yellow">
+      <div class="kpi-label">Score SEO</div>
+      <div class="kpi-value">58/100</div>
+      <div class="kpi-sub" style="color:var(--yellow)">🟡 Oportunidad de mejora</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">E-commerce Score</div>
+      <div class="kpi-value">82/100</div>
+      <div class="kpi-sub" style="color:var(--green)">🟢 Stack avanzado</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Radar de Salud Digital por Dimensión</div>
+      <div class="chart-wrap"><canvas id="radarOverview"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Score por Canal</div>
+      <div class="chart-wrap"><canvas id="barOverview"></canvas></div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Canal</th><th>Audiencia</th><th>Estado</th><th>Score</th><th>Notas</th></tr></thead>
+      <tbody>
+        <tr><td>Instagram @bplusd.ar</td><td>107K followers</td><td><span class="badge badge-green">✅ Activo</span></td><td><strong>78/100</strong></td><td>Colaboración Lali Espósito</td></tr>
+        <tr><td>Facebook (bplusd.world)</td><td>N/D específico AR</td><td><span class="badge badge-yellow">⚠️ Global</span></td><td><strong>55/100</strong></td><td>Página mundial sin segmentación AR</td></tr>
+        <tr><td>TikTok</td><td>Sin cuenta orgánica</td><td><span class="badge badge-yellow">⚠️ Solo Ads</span></td><td><strong>30/100</strong></td><td>Pixel instalado — pauta activa</td></tr>
+        <tr><td>LinkedIn AR</td><td>Limitado</td><td><span class="badge badge-yellow">⚠️ Poco dev.</span></td><td><strong>20/100</strong></td><td>Perfil existente sin actividad</td></tr>
+        <tr><td>Web bplusd.com.ar</td><td>—</td><td><span class="badge badge-green">✅ Avanzado</span></td><td><strong>82/100</strong></td><td>WooCommerce + VWO + Clarity</td></tr>
+        <tr><td>Email (Klaviyo + MC)</td><td>—</td><td><span class="badge badge-green">✅ Configurado</span></td><td><strong>75/100</strong></td><td>Automatizaciones activas</td></tr>
+        <tr><td>MercadoLibre</td><td>Tienda oficial</td><td><span class="badge badge-green">✅ Activo</span></td><td><strong>70/100</strong></td><td>Reviews y ventas online</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="foda-block">
+    <div class="foda-item foda-green"><h4>🟢 Fortaleza</h4><p>E-commerce maduro con stack tecnológico avanzado + 107K seguidores en Instagram + red de 10 tiendas propias + colaboración con Lali Espósito.</p></div>
+    <div class="foda-item foda-yellow"><h4>🟡 Punto Medio</h4><p>Facebook global sin segmentación AR · TikTok solo pauta sin cuenta orgánica · LinkedIn existente pero sin actividad documentada.</p></div>
+    <div class="foda-item foda-red"><h4>🔴 Debilidad</h4><p>Sin datos públicos de ROAS/conversión · sin estrategia de contenido TikTok orgánico · LinkedIn prácticamente inexistente para B2B.</p></div>
+  </div>
+  <div class="foda-rec"><strong>Recomendación:</strong> Crear cuenta TikTok orgánica (@bplusd.ar) aprovechando pixel ya instalado y audiencia de ads. Activar LinkedIn para canal B2B con distribuidores y ópticas.</div>
+</div>
+
+<!-- ===================== WEB ===================== -->
+<div id="section-web" class="section">
+  <div class="section-title">Web & E-commerce</div>
+  <div class="section-subtitle">bplusd.com.ar — WordPress + WooCommerce + Flatsome Theme</div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card green"><div class="kpi-label">E-commerce Score</div><div class="kpi-value">82/100</div><div class="kpi-sub" style="color:var(--green)">🟢 Stack avanzado</div></div>
+    <div class="kpi-card green"><div class="kpi-label">Mobile Score</div><div class="kpi-value">88/100</div><div class="kpi-sub" style="color:var(--green)">🟢 Responsive optimizado</div></div>
+    <div class="kpi-card green"><div class="kpi-label">Tech Stack</div><div class="kpi-value">Avanzado</div><div class="kpi-sub" style="color:var(--green)">VWO · Clarity · Klaviyo · GTM</div></div>
+    <div class="kpi-card green"><div class="kpi-label">Conversión Tools</div><div class="kpi-value">8+</div><div class="kpi-sub" style="color:var(--green)">Wishlist · Sticky cart · 360° · A/B</div></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Score por Categoría Web</div>
+      <div class="chart-wrap"><canvas id="barWeb"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Funcionalidades E-commerce</div>
+      <div class="chart-wrap"><canvas id="doughnutWeb"></canvas></div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Funcionalidad</th><th>Estado</th><th>Impacto</th></tr></thead>
+      <tbody>
+        <tr><td>Lazy loading de imágenes</td><td><span class="badge badge-green">✅ Activo</span></td><td>Performance</td></tr>
+        <tr><td>Mobile responsive (Flatsome)</td><td><span class="badge badge-green">✅ Activo</span></td><td>UX/conversión</td></tr>
+        <tr><td>WhatsApp flotante</td><td><span class="badge badge-green">✅ Activo</span></td><td>Conversión directa</td></tr>
+        <tr><td>Quick Shop / vista rápida</td><td><span class="badge badge-green">✅ Activo</span></td><td>Reducción fricción</td></tr>
+        <tr><td>Filtros por color y graduación</td><td><span class="badge badge-green">✅ Activo</span></td><td>Experiencia de compra</td></tr>
+        <tr><td>Newsletter popup</td><td><span class="badge badge-green">✅ Activo</span></td><td>Captación leads</td></tr>
+        <tr><td>Wishlist</td><td><span class="badge badge-green">✅ Activo</span></td><td>Retención</td></tr>
+        <tr><td>ShipNow (logística)</td><td><span class="badge badge-green">✅ Activo</span></td><td>Fulfillment</td></tr>
+        <tr><td>3 cuotas sin interés</td><td><span class="badge badge-green">✅ Activo</span></td><td>Conversión precio</td></tr>
+        <tr><td>Envío gratis (2 opciones)</td><td><span class="badge badge-green">✅ Activo</span></td><td>Reducción abandono</td></tr>
+        <tr><td>Botón arrepentimiento</td><td><span class="badge badge-green">✅ Legal AR</span></td><td>Compliance</td></tr>
+        <tr><td>10% descuento transferencia</td><td><span class="badge badge-green">✅ Activo</span></td><td>Reducción comisión</td></tr>
+        <tr><td>VWO A/B Testing</td><td><span class="badge badge-green">✅ Instalado</span></td><td>Optimización continua</td></tr>
+        <tr><td>Microsoft Clarity</td><td><span class="badge badge-green">✅ Instalado</span></td><td>Mapas de calor + grabaciones</td></tr>
+        <tr><td>Reviews en ficha de producto</td><td><span class="badge badge-yellow">⚠️ No visible</span></td><td>Social proof</td></tr>
+        <tr><td>Blog/contenido editorial</td><td><span class="badge badge-yellow">⚠️ Baja actividad</span></td><td>SEO + educación</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px;margin-bottom:20px;">
+    <div class="chart-title">Highlights Técnicos Diferenciadores</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;">
+      <div style="background:#e6f9f0;border-radius:6px;padding:12px;font-size:12px;color:var(--light);"><strong style="color:var(--green)">VWO</strong> — Plataforma de A/B testing y experimentación. Diferenciador competitivo: la mayoría de competidores del segmento no realizan optimización sistemática.</div>
+      <div style="background:#e6f9f0;border-radius:6px;padding:12px;font-size:12px;color:var(--light);"><strong style="color:var(--green)">Microsoft Clarity</strong> — Grabación de sesiones y mapas de calor. Permite ver exactamente cómo navegan los usuarios y dónde se traban.</div>
+      <div style="background:#e8f0fb;border-radius:6px;padding:12px;font-size:12px;color:var(--light);"><strong style="color:var(--blue)">WPML</strong> — Soporte multiidioma. Habilita expansión internacional sin refactorizar el sitio.</div>
+      <div style="background:#e8f0fb;border-radius:6px;padding:12px;font-size:12px;color:var(--light);"><strong style="color:var(--blue)">PixelYourSite</strong> — Gestión avanzada de múltiples pixels (Meta + TikTok + GA4) desde un punto centralizado.</div>
+    </div>
+  </div>
+
+  <div class="foda-block">
+    <div class="foda-item foda-green"><h4>🟢 Fortaleza</h4><p>Stack tecnológico de e-commerce superior al promedio del segmento. VWO + Clarity permiten optimización basada en datos.</p></div>
+    <div class="foda-item foda-yellow"><h4>🟡 Punto Medio</h4><p>Blog/News existe pero con baja frecuencia editorial documentada. Potencial SEO no explotado.</p></div>
+    <div class="foda-item foda-red"><h4>🔴 Debilidad</h4><p>Sin reviews de clientes visibles en fichas de producto. La falta de social proof reduce la tasa de conversión estimada.</p></div>
+  </div>
+  <div class="foda-rec"><strong>Recomendación:</strong> Integrar plugin de reviews (Yotpo o Judge.me para WooCommerce) y activar solicitud automática de reseña post-compra via Klaviyo (ya instalado). Implementar schema de review en fichas para SEO.</div>
+</div>
+
+<!-- ===================== SOCIAL ===================== -->
+<div id="section-social" class="section">
+  <div class="section-title">Redes Sociales</div>
+  <div class="section-subtitle">Instagram · Facebook · TikTok · LinkedIn</div>
+
+  <div class="subtabs">
+    <div class="subtab active" onclick="showSubtab('social','ig',this)">📸 Instagram</div>
+    <div class="subtab" onclick="showSubtab('social','fb',this)">📘 Facebook</div>
+    <div class="subtab" onclick="showSubtab('social','tt',this)">🎵 TikTok</div>
+    <div class="subtab" onclick="showSubtab('social','li',this)">💼 LinkedIn</div>
+  </div>
+
+  <!-- INSTAGRAM -->
+  <div id="social-ig" class="subpanel active">
+    <div class="kpi-grid">
+      <div class="kpi-card green"><div class="kpi-label">Seguidores</div><div class="kpi-value">107K</div><div class="kpi-sub" style="color:var(--green)">✅ Comunidad activa</div></div>
+      <div class="kpi-card green"><div class="kpi-label">Score IG</div><div class="kpi-value">78/100</div><div class="kpi-sub" style="color:var(--green)">🟢 Buena performance</div></div>
+      <div class="kpi-card green"><div class="kpi-label">ER Estimado</div><div class="kpi-value">~3-5%</div><div class="kpi-sub" style="color:var(--green)">✅ Sobre el promedio industria</div></div>
+      <div class="kpi-card green"><div class="kpi-label">Embajadora</div><div class="kpi-value">Lali</div><div class="kpi-sub" style="color:var(--green)">✅ Millones de fans</div></div>
+    </div>
+    <div class="grid-2">
+      <div class="chart-card">
+        <div class="chart-title">Distribución de Contenido (estimado)</div>
+        <div class="chart-wrap"><canvas id="doughnutIG"></canvas></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px;">
+        <div class="chart-title">Fortalezas de Instagram</div>
+        <div style="margin-top:10px;font-size:13px;line-height:2;color:var(--light);">
+          ✅ Handle @bplusd.ar — bien posicionado<br>
+          ✅ Feed integrado en sitio web via Smash Balloon<br>
+          ✅ Colaboración con Lali Espósito — altísimo alcance<br>
+          ✅ Stories y Reels con producto en uso<br>
+          ✅ Instagram Shopping habilitado<br>
+          ⚠️ UGC (contenido de usuarios) no sistematizado<br>
+          ⚠️ Hashtag de marca propio no identificado<br>
+          ⚠️ Guías de IG no evidenciadas
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FACEBOOK -->
+  <div id="social-fb" class="subpanel">
+    <div class="kpi-grid">
+      <div class="kpi-card yellow"><div class="kpi-label">Tipo de página</div><div class="kpi-value">Global</div><div class="kpi-sub" style="color:var(--yellow)">⚠️ bplusd.world</div></div>
+      <div class="kpi-card yellow"><div class="kpi-label">Score FB</div><div class="kpi-value">55/100</div><div class="kpi-sub" style="color:var(--yellow)">🟡 Limitado para AR</div></div>
+      <div class="kpi-card yellow"><div class="kpi-label">Seguidores AR</div><div class="kpi-value">N/D</div><div class="kpi-sub" style="color:var(--subtle)">No segregado por país</div></div>
+      <div class="kpi-card green"><div class="kpi-label">Meta Pixel</div><div class="kpi-value">✅</div><div class="kpi-sub" style="color:var(--green)">556509388618520</div></div>
+    </div>
+    <div style="background:#fff8e0;border:1px solid var(--yellow);border-radius:8px;padding:18px;margin-bottom:20px;font-size:13px;color:var(--light);line-height:1.7;">
+      <strong style="color:var(--yellow);">⚠️ Facebook Global vs Argentina</strong><br>
+      B+D opera con la página global <strong>bplusd.world</strong> para toda la presencia de Facebook, incluyendo Argentina. Esto significa que el contenido publicado no siempre es relevante para el consumidor argentino (idioma, precio en ARS, contexto estacional). Sin embargo, el Meta Pixel está correctamente configurado en el sitio argentino, lo que permite campañas de Meta Ads segmentadas geográficamente.
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Aspecto</th><th>Estado</th><th>Impacto</th></tr></thead>
+        <tbody>
+          <tr><td>Página Argentina específica</td><td><span class="badge badge-red">❌ No existe</span></td><td>Contenido no localizado</td></tr>
+          <tr><td>Meta Pixel instalado</td><td><span class="badge badge-green">✅ Activo</span></td><td>Remarketing + lookalike</td></tr>
+          <tr><td>Campañas de Meta Ads</td><td><span class="badge badge-green">✅ Asumida</span></td><td>Pauta segmentada posible</td></tr>
+          <tr><td>Contenido en español AR</td><td><span class="badge badge-yellow">⚠️ Parcial</span></td><td>Relevancia para AR</td></tr>
+          <tr><td>Catálogo de productos</td><td><span class="badge badge-yellow">⚠️ No confirmado</span></td><td>Dynamic ads</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TIKTOK -->
+  <div id="social-tt" class="subpanel">
+    <div style="background:#111;border-radius:8px;padding:12px 18px;margin-bottom:20px;display:inline-flex;align-items:center;gap:12px;">
+      <span style="color:#fff;font-weight:bold;font-size:14px;">🎵 TikTok</span>
+      <span style="background:#ff221c;color:#fff;padding:3px 12px;border-radius:20px;font-size:12px;font-weight:bold;">Solo pauta · Sin cuenta orgánica</span>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card red"><div class="kpi-label">Cuenta orgánica</div><div class="kpi-value">❌ No</div><div class="kpi-sub" style="color:var(--red)">Sin presencia orgánica</div></div>
+      <div class="kpi-card green"><div class="kpi-label">TikTok Pixel</div><div class="kpi-value">✅</div><div class="kpi-sub" style="color:var(--green)">D5L9D7BC77U1B68M3UD0</div></div>
+      <div class="kpi-card yellow"><div class="kpi-label">Score TikTok</div><div class="kpi-value">30/100</div><div class="kpi-sub" style="color:var(--yellow)">⚠️ Solo pauta</div></div>
+      <div class="kpi-card blue"><div class="kpi-label">Oportunidad</div><div class="kpi-value">Alta</div><div class="kpi-sub" style="color:var(--blue)">Segmento 40+ en tendencia</div></div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px;margin-bottom:20px;font-size:13px;color:var(--light);line-height:1.8;">
+      <strong>Contexto de oportunidad:</strong> El segmento de anteojos de lectura tiene tendencias virales en TikTok — búsquedas como "anteojos de lectura stylish", "gafas over 40", "lectura y estilo" generan millones de views globalmente. B+D tiene pixel instalado (probablemente corren TikTok Ads), lo que implica que ya tienen audiencias construidas que podrían activarse con contenido orgánico.<br><br>
+      <strong>Recomendación crítica:</strong> Crear @bplusd.ar en TikTok es una quick win de alto impacto que no requiere inversión adicional, solo producción de contenido.
+    </div>
+  </div>
+
+  <!-- LINKEDIN -->
+  <div id="social-li" class="subpanel">
+    <div class="kpi-grid">
+      <div class="kpi-card yellow"><div class="kpi-label">Perfil</div><div class="kpi-value">Existe</div><div class="kpi-sub" style="color:var(--yellow)">@bplusdargentina</div></div>
+      <div class="kpi-card red"><div class="kpi-label">Score LinkedIn</div><div class="kpi-value">20/100</div><div class="kpi-sub" style="color:var(--red)">🔴 Inactivo</div></div>
+      <div class="kpi-card blue"><div class="kpi-label">Oportunidad B2B</div><div class="kpi-value">Alta</div><div class="kpi-sub" style="color:var(--blue)">Ópticas · Distribuidores</div></div>
+      <div class="kpi-card yellow"><div class="kpi-label">Actividad</div><div class="kpi-value">Baja</div><div class="kpi-sub" style="color:var(--yellow)">Sin contenido regular</div></div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px;font-size:13px;color:var(--light);line-height:1.8;">
+      <strong>Canales B2B potenciales para LinkedIn:</strong><br>
+      • Distribuidores ópticos en Argentina<br>
+      • Farmacias con área de óptica<br>
+      • Retailers de salud y bienestar<br>
+      • Franquiciados potenciales (expansión)<br>
+      • Proveedores y socios comerciales<br><br>
+      LinkedIn puede ser un canal estratégico para desarrollo de negocio sin costo de adquisición pagado, aprovechando la marca europea de B+D.
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="chart-card" style="margin-bottom:20px;">
+    <div class="chart-title">Scorecard Multi-Plataforma</div>
+    <div class="chart-wrap"><canvas id="barSocial"></canvas></div>
+  </div>
+
+  <div class="foda-block">
+    <div class="foda-item foda-green"><h4>🟢 Fortaleza</h4><p>107K seguidores en Instagram + colaboración con Lali Espósito = alta credibilidad social y alcance orgánico potente.</p></div>
+    <div class="foda-item foda-yellow"><h4>🟡 Punto Medio</h4><p>Facebook global sin segmentación Argentina · TikTok con ads activos pero sin cuenta orgánica que amplifique el alcance.</p></div>
+    <div class="foda-item foda-red"><h4>🔴 Debilidad</h4><p>Sin estrategia de UGC documentada · Sin TikTok orgánico para el segmento 40+ · LinkedIn inexistente para desarrollo B2B.</p></div>
+  </div>
+  <div class="foda-rec"><strong>Recomendación:</strong> Lanzar @bplusd.ar en TikTok con 3 videos/semana orientados al segmento 40+. Activar campaña de UGC con hashtag de marca en Instagram para multiplicar contenido sin costo.</div>
+</div>
+
+<!-- ===================== PAUTA DIGITAL ===================== -->
+<div id="section-pauta" class="section">
+  <div class="section-title">Pauta Digital</div>
+  <div class="section-subtitle">Stack de tracking completo · Meta · Google · TikTok · Email Marketing</div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card green"><div class="kpi-label">Meta Pixel</div><div class="kpi-value">✅</div><div class="kpi-sub" style="color:var(--green)">556509388618520</div></div>
+    <div class="kpi-card green"><div class="kpi-label">TikTok Pixel</div><div class="kpi-value">✅</div><div class="kpi-sub" style="color:var(--yellow)">D5L9D7BC77U1B68M3UD0 · Sin orgánico</div></div>
+    <div class="kpi-card green"><div class="kpi-label">Google Ads Tag</div><div class="kpi-value">✅</div><div class="kpi-sub" style="color:var(--green)">AW-721395440</div></div>
+    <div class="kpi-card green"><div class="kpi-label">Email Automation</div><div class="kpi-value">✅</div><div class="kpi-sub" style="color:var(--green)">Klaviyo + MailChimp activos</div></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Canales de Pauta — Configuración</div>
+      <div class="chart-wrap"><canvas id="barPauta"></canvas></div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px;">
+      <div class="chart-title">Stack de Tracking Detectado</div>
+      <div style="margin-top:10px;display:flex;flex-direction:column;gap:10px;">
+        <div style="background:#e6f9f0;border-radius:6px;padding:10px 14px;font-size:12px;"><strong style="color:var(--green)">Google Tag Manager (GTM)</strong> — Contenedor centralizado para todos los tags</div>
+        <div style="background:#e6f9f0;border-radius:6px;padding:10px 14px;font-size:12px;"><strong style="color:var(--green)">Meta Pixel</strong> — Eventos de conversión, remarketing, lookalike audiences</div>
+        <div style="background:#e6f9f0;border-radius:6px;padding:10px 14px;font-size:12px;"><strong style="color:var(--green)">TikTok Pixel</strong> — Conversiones desde pauta TikTok</div>
+        <div style="background:#e6f9f0;border-radius:6px;padding:10px 14px;font-size:12px;"><strong style="color:var(--green)">Google Analytics 4 (GA4)</strong> — Analítica web completa</div>
+        <div style="background:#e6f9f0;border-radius:6px;padding:10px 14px;font-size:12px;"><strong style="color:var(--green)">Google Ads Conversion Tag</strong> — Tracking de conversiones para SEM</div>
+        <div style="background:#e8f0fb;border-radius:6px;padding:10px 14px;font-size:12px;"><strong style="color:var(--blue)">VWO (Visual Website Optimizer)</strong> — A/B testing y optimización</div>
+        <div style="background:#e8f0fb;border-radius:6px;padding:10px 14px;font-size:12px;"><strong style="color:var(--blue)">Microsoft Clarity</strong> — Heatmaps y grabaciones de sesión</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Canal</th><th>Pixel/Tag</th><th>Cuenta activa</th><th>Datos disponibles</th><th>Potencial</th></tr></thead>
+      <tbody>
+        <tr><td>Meta Ads (FB + IG)</td><td><span class="badge badge-green">✅ Pixel OK</span></td><td><span class="badge badge-green">Asumida activa</span></td><td><span class="badge badge-yellow">⚡ Solo interno</span></td><td>Alto — remarketing + lookalike</td></tr>
+        <tr><td>Google Ads (SEM)</td><td><span class="badge badge-green">✅ Tag OK</span></td><td><span class="badge badge-green">Asumida activa</span></td><td><span class="badge badge-yellow">⚡ Solo interno</span></td><td>Alto — búsquedas de marca</td></tr>
+        <tr><td>TikTok Ads</td><td><span class="badge badge-green">✅ Pixel OK</span></td><td><span class="badge badge-yellow">⚠️ Sin orgánico</span></td><td><span class="badge badge-red">❌ Sin datos</span></td><td>Muy alto — segmento 40+</td></tr>
+        <tr><td>Email (Klaviyo)</td><td><span class="badge badge-green">✅ Instalado</span></td><td><span class="badge badge-green">✅ Activo</span></td><td><span class="badge badge-yellow">⚡ Solo interno</span></td><td>Alto — automatizaciones</td></tr>
+        <tr><td>Google Shopping</td><td><span class="badge badge-yellow">⚠️ A confirmar</span></td><td><span class="badge badge-yellow">⚠️ No confirmado</span></td><td><span class="badge badge-red">❌ Sin datos</span></td><td>Medio — catálogo online</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="background:#fff8e0;border:1px solid var(--yellow);border-radius:8px;padding:16px;margin-bottom:20px;font-size:13px;color:var(--light);">
+    <strong style="color:var(--yellow);">⚠️ Nota sobre datos de pauta:</strong> Al ser una auditoría de datos públicos, no es posible acceder a métricas de performance real (ROAS, CPC, CPM, CTR) de las campañas. Los datos de configuración técnica (pixels, tags) son verificables públicamente. Para una auditoría completa de pauta se requiere acceso a Meta Ads Manager y Google Ads.
+  </div>
+
+  <div class="foda-block">
+    <div class="foda-item foda-green"><h4>🟢 Fortaleza</h4><p>Stack de tracking completo y bien configurado — Meta Pixel + TikTok Pixel + Google Ads + GTM. Infraestructura lista para escalar inversión publicitaria.</p></div>
+    <div class="foda-item foda-yellow"><h4>🟡 Punto Medio</h4><p>VWO instalado para A/B testing → optimización de conversión activa. Sin embargo, sin acceso a datos no es posible medir el impacto real.</p></div>
+    <div class="foda-item foda-red"><h4>🔴 Debilidad</h4><p>Sin datos públicos de ROAS, CPM, CPC. TikTok Ads sin cuenta orgánica que amplifique el alcance y reduzca el costo de adquisición.</p></div>
+  </div>
+  <div class="foda-rec"><strong>Recomendación:</strong> Activar Google Shopping con catálogo de productos de WooCommerce (integración nativa). Crear cuenta TikTok orgánica para complementar la pauta y reducir CPM via engagement orgánico.</div>
+</div>
+
+<!-- ===================== SEO ===================== -->
+<div id="section-seo" class="section">
+  <div class="section-title">SEO & Visibilidad</div>
+  <div class="section-subtitle">Posicionamiento orgánico · Búsquedas branded y categóricas · Marketplaces</div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card green"><div class="kpi-label">Búsquedas branded</div><div class="kpi-value">Fuerte</div><div class="kpi-sub" style="color:var(--green)">✅ "B+D anteojos" bien posicionado</div></div>
+    <div class="kpi-card yellow"><div class="kpi-label">Búsquedas categóricas</div><div class="kpi-value">Medio</div><div class="kpi-sub" style="color:var(--yellow)">⚠️ Oportunidad de mejora</div></div>
+    <div class="kpi-card green"><div class="kpi-label">MercadoLibre</div><div class="kpi-value">Fuerte</div><div class="kpi-sub" style="color:var(--green)">✅ Tienda oficial activa</div></div>
+    <div class="kpi-card yellow"><div class="kpi-label">Score SEO</div><div class="kpi-value">58/100</div><div class="kpi-sub" style="color:var(--yellow)">🟡 Base sólida con gaps</div></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Visibilidad por Tipo de Búsqueda</div>
+      <div class="chart-wrap"><canvas id="barSEO"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Distribución de Presencia Online</div>
+      <div class="chart-wrap"><canvas id="doughnutSEO"></canvas></div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Aspecto SEO</th><th>Estado</th><th>Prioridad</th><th>Acción</th></tr></thead>
+      <tbody>
+        <tr><td>Schema de producto (WooCommerce)</td><td><span class="badge badge-green">✅ Automático</span></td><td>—</td><td>Verificar correcta implementación</td></tr>
+        <tr><td>Google My Business (10 locales)</td><td><span class="badge badge-yellow">⚠️ Optimizable</span></td><td>Alta</td><td>Completar info, fotos, horarios, reviews</td></tr>
+        <tr><td>Blog editorial</td><td><span class="badge badge-yellow">⚠️ Baja actividad</span></td><td>Alta</td><td>2 posts/semana — salud visual, blue light</td></tr>
+        <tr><td>Canal YouTube</td><td><span class="badge badge-red">❌ No identificado</span></td><td>Media</td><td>Crear canal con tutoriales y educación</td></tr>
+        <tr><td>Link building / Prensa</td><td><span class="badge badge-yellow">⚠️ Pocas menciones</span></td><td>Media</td><td>PR digital + notas en medios lifestyle</td></tr>
+        <tr><td>Búsquedas long-tail</td><td><span class="badge badge-yellow">⚠️ Sin estrategia</span></td><td>Alta</td><td>"anteojos de lectura +3 graduación Argentina"</td></tr>
+        <tr><td>MercadoLibre SEO</td><td><span class="badge badge-green">✅ Tienda oficial</span></td><td>—</td><td>Optimizar títulos y fichas de ML</td></tr>
+        <tr><td>HTTPS / SSL</td><td><span class="badge badge-green">✅ Activo</span></td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px;margin-bottom:20px;">
+    <div class="chart-title">Keywords de Oportunidad (estimado)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;">
+      <div style="background:#ffe8e8;border-radius:6px;padding:10px;font-size:12px;"><strong>"anteojos de lectura argentina"</strong> — alto volumen, competencia media</div>
+      <div style="background:#ffe8e8;border-radius:6px;padding:10px;font-size:12px;"><strong>"anteojos blue light"</strong> — tendencia creciente post-pandemia</div>
+      <div style="background:#fff8e0;border-radius:6px;padding:10px;font-size:12px;"><strong>"anteojos de sol Buenos Aires"</strong> — volumen medio, intención de compra</div>
+      <div style="background:#fff8e0;border-radius:6px;padding:10px;font-size:12px;"><strong>"gafas de lectura graduadas +2"</strong> — long-tail de alta conversión</div>
+      <div style="background:#e6f9f0;border-radius:6px;padding:10px;font-size:12px;"><strong>"B+D anteojos"</strong> — branded, bien posicionado</div>
+      <div style="background:#e6f9f0;border-radius:6px;padding:10px;font-size:12px;"><strong>"anteojos diseño escandinavo"</strong> — diferenciador de nicho</div>
+    </div>
+  </div>
+
+  <div class="foda-block">
+    <div class="foda-item foda-green"><h4>🟢 Fortaleza</h4><p>WooCommerce genera schema de producto automáticamente. Tienda oficial en MercadoLibre con visibilidad en el marketplace líder de AR.</p></div>
+    <div class="foda-item foda-yellow"><h4>🟡 Punto Medio</h4><p>Blog existe pero sin frecuencia regular. 10 Google My Business locales son optimizables sin costo. Menciones de prensa escasas en 2024-2026.</p></div>
+    <div class="foda-item foda-red"><h4>🔴 Debilidad</h4><p>Sin canal YouTube identificado. Sin estrategia de contenido SEO para búsquedas categóricas como "anteojos de lectura graduados Argentina".</p></div>
+  </div>
+  <div class="foda-rec"><strong>Recomendación:</strong> Crear calendario editorial del blog con 2 posts/semana enfocados en blue light, salud visual y estilo. Optimizar las 10 fichas de Google My Business (fotos, horarios, respuesta a reviews). Iniciar canal YouTube con videos cortos educativos sobre lectura y cuidado visual.</div>
+</div>
+
+<!-- ===================== REPUTACIÓN ===================== -->
+<div id="section-reputacion" class="section">
+  <div class="section-title">Reputación Online</div>
+  <div class="section-subtitle">Sentimiento de marca · Reviews · Percepción pública</div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card green"><div class="kpi-label">Score Reputación</div><div class="kpi-value">72/100</div><div class="kpi-sub" style="color:var(--green)">🟢 Positivo</div></div>
+    <div class="kpi-card green"><div class="kpi-label">Sentimiento positivo</div><div class="kpi-value">60%</div><div class="kpi-sub" style="color:var(--green)">Comunidad activa en IG</div></div>
+    <div class="kpi-card yellow"><div class="kpi-label">Sentimiento neutro</div><div class="kpi-value">25%</div><div class="kpi-sub" style="color:var(--yellow)">Precio en mercado inflacionario</div></div>
+    <div class="kpi-card red"><div class="kpi-label">Sentimiento negativo</div><div class="kpi-value">15%</div><div class="kpi-sub" style="color:var(--red)">Pocas reseñas formales</div></div>
+  </div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px;margin-bottom:20px;">
+    <div class="chart-title">Distribución de Sentimiento (estimado — datos públicos)</div>
+    <div class="sentiment-bar" style="margin:16px 0;">
+      <div class="sent-pos" style="width:60%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:bold;">60% Positivo</div>
+      <div class="sent-neu" style="width:25%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:bold;">25%</div>
+      <div class="sent-neg" style="width:15%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:bold;">15%</div>
+    </div>
+    <div style="font-size:12px;color:var(--subtle);">* Estimación basada en señales públicas: engagement en Instagram, reviews en MercadoLibre, menciones en medios.</div>
+  </div>
+
+  <div class="grid-2">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px;">
+      <div class="chart-title" style="color:var(--green)">✅ Señales positivas</div>
+      <ul style="padding-left:16px;margin-top:10px;font-size:13px;color:var(--light);line-height:2;">
+        <li>107K seguidores en Instagram — comunidad activa</li>
+        <li>Colaboración con Lali Espósito — imagen premium</li>
+        <li>10 tiendas propias — presencia física validadora</li>
+        <li>Marca europea reconocida (1972, Dinamarca)</li>
+        <li>Presence en marketplaces oficiales (ML)</li>
+        <li>Diseño diferenciado vs competidores genéricos</li>
+      </ul>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px;">
+      <div class="chart-title" style="color:var(--red)">⚠️ Áreas de mejora</div>
+      <ul style="padding-left:16px;margin-top:10px;font-size:13px;color:var(--light);line-height:2;">
+        <li>Sin Trustpilot ni plataforma de reviews propia</li>
+        <li>Reviews en ML presentes sin gestión activa visible</li>
+        <li>Sin proceso de solicitud de reseña post-compra</li>
+        <li>Google Reviews por tienda no integrados al sitio</li>
+        <li>Precio 39K-170K ARS en mercado inflacionario</li>
+        <li>Sin testimonios en video integrados al sitio web</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:20px;">
+    <table>
+      <thead><tr><th>Plataforma</th><th>Reviews</th><th>Gestión activa</th><th>Impacto</th></tr></thead>
+      <tbody>
+        <tr><td>MercadoLibre</td><td><span class="badge badge-green">✅ Presentes</span></td><td><span class="badge badge-yellow">⚠️ No visible</span></td><td>Alto — decisión de compra</td></tr>
+        <tr><td>Google My Business</td><td><span class="badge badge-yellow">⚠️ Dispersas</span></td><td><span class="badge badge-yellow">⚠️ Sin sistema</span></td><td>Alto — búsquedas locales</td></tr>
+        <tr><td>Instagram</td><td><span class="badge badge-green">✅ Comentarios activos</span></td><td><span class="badge badge-green">✅ Responde</span></td><td>Medio — comunidad</td></tr>
+        <tr><td>Trustpilot</td><td><span class="badge badge-red">❌ No registrado</span></td><td><span class="badge badge-red">❌ Inexistente</span></td><td>Medio — credibilidad</td></tr>
+        <tr><td>Sitio web (reviews)</td><td><span class="badge badge-red">❌ No visible</span></td><td><span class="badge badge-red">❌ No integrado</span></td><td>Alto — conversión directa</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="foda-block">
+    <div class="foda-item foda-green"><h4>🟢 Fortaleza</h4><p>107K seguidores en Instagram + Lali Espósito = imagen de marca positiva y aspiracional consolidada. Presencia física en 10 tiendas genera confianza.</p></div>
+    <div class="foda-item foda-yellow"><h4>🟡 Punto Medio</h4><p>Reviews en MercadoLibre presentes pero sin gestión activa visible en el sitio web oficial. Reputación positiva sin sistematizar.</p></div>
+    <div class="foda-item foda-red"><h4>🔴 Debilidad</h4><p>Sin Trustpilot, sin Google Reviews integrado en sitio, sin proceso de solicitud de reseña post-compra. La falta de social proof visible reduce la tasa de conversión.</p></div>
+  </div>
+  <div class="foda-rec"><strong>Recomendación:</strong> Activar flujo automatizado de solicitud de reseña en Klaviyo (ya instalado) — 7 días post-compra. Integrar widget de Google Reviews en la homepage. Meta: llegar a 50+ reviews verificadas en 90 días.</div>
+</div>
+
+<!-- ===================== COMPETIDORES ===================== -->
+<div id="section-competidores" class="section">
+  <div class="section-title">Análisis Competitivo</div>
+  <div class="section-subtitle">B+D Argentina vs principales competidores del mercado</div>
+
+  <div class="grid-2">
+    <div class="chart-card">
+      <div class="chart-title">Radar Competitivo</div>
+      <div class="chart-wrap-tall"><canvas id="radarComp"></canvas></div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px;">
+      <div class="chart-title">Posicionamiento Único de B+D</div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;">
+        <div style="background:#e6f9f0;border-radius:6px;padding:10px;font-size:12px;color:var(--light);"><strong style="color:var(--green)">Especialista de nicho</strong> — Foco en anteojos de lectura y pantallas. No compite como generalista contra Ray-Ban u Oakley.</div>
+        <div style="background:#e6f9f0;border-radius:6px;padding:10px;font-size:12px;color:var(--light);"><strong style="color:var(--green)">Diseño escandinavo / colorido</strong> — Estética diferenciada que no tienen las ópticas locales.</div>
+        <div style="background:#e6f9f0;border-radius:6px;padding:10px;font-size:12px;color:var(--light);"><strong style="color:var(--green)">10 tiendas propias</strong> — Control total de la experiencia de compra vs distribución de terceros.</div>
+        <div style="background:#e6f9f0;border-radius:6px;padding:10px;font-size:12px;color:var(--light);"><strong style="color:var(--green)">Tech stack avanzado</strong> — VWO, Clarity, Klaviyo. La mayoría de competidores directos no tienen esto.</div>
+        <div style="background:#fff8e0;border-radius:6px;padding:10px;font-size:12px;color:var(--light);"><strong style="color:var(--yellow)">Precio mid-premium</strong> — 39K-170K ARS. Más caro que ópticas locales, más accesible que Ray-Ban premium.</div>
+        <div style="background:#ffe8e8;border-radius:6px;padding:10px;font-size:12px;color:var(--light);"><strong style="color:var(--red)">Sin cobertura de obra social</strong> — Las ópticas tradicionales tienen ventaja estructural con seguros médicos.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:20px;">
+    <table>
+      <thead><tr><th>Competidor</th><th>Tipo</th><th>Fortaleza principal</th><th>Debilidad vs B+D</th><th>Amenaza</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Ray-Ban / Oakley</strong></td><td>Premium global</td><td>Brand equity masivo</td><td>No especializados en lectura</td><td><span class="badge badge-yellow">Media</span></td></tr>
+        <tr><td><strong>Smart Readers</strong></td><td>Lectura específica</td><td>Precio accesible, distribución amplia</td><td>Sin diseño diferenciado, sin tiendas propias</td><td><span class="badge badge-green">Baja</span></td></tr>
+        <tr><td><strong>Ópticas locales</strong></td><td>Mid market</td><td>Obras sociales, conveniencia</td><td>Sin e-commerce avanzado, diseño genérico</td><td><span class="badge badge-red">Alta</span></td></tr>
+        <tr><td><strong>Warby Parker (si entra)</strong></td><td>DTC global</td><td>E-commerce nativo, prescripción online</td><td>Sin presencia física AR confirmada</td><td><span class="badge badge-yellow">Media futura</span></td></tr>
+        <tr><td><strong>Tiendas ML (chinas)</strong></td><td>Low cost</td><td>Precio mínimo</td><td>Sin marca, sin experiencia, sin tiendas</td><td><span class="badge badge-green">Baja</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="comp-legend">
+    <div class="comp-legend-item"><div class="comp-dot" style="background:var(--accent)"></div> B+D Argentina</div>
+    <div class="comp-legend-item"><div class="comp-dot" style="background:var(--blue)"></div> Ray-Ban AR</div>
+    <div class="comp-legend-item"><div class="comp-dot" style="background:var(--green)"></div> Smart Readers</div>
+    <div class="comp-legend-item"><div class="comp-dot" style="background:var(--orange)"></div> Ópticas locales</div>
+  </div>
+
+  <div class="foda-block" style="margin-top:20px;">
+    <div class="foda-item foda-green"><h4>🟢 Fortaleza</h4><p>Nicho bien definido (lectura + pantallas + sol) con tiendas propias y diseño diferenciado. Tech stack de e-commerce superior a todos los competidores directos del segmento.</p></div>
+    <div class="foda-item foda-yellow"><h4>🟡 Punto Medio</h4><p>Precio mid-premium (39K-170K ARS) en mercado inflacionario argentino donde el consumidor es sensible al precio. Compite en segmento donde la comparación es constante.</p></div>
+    <div class="foda-item foda-red"><h4>🔴 Debilidad</h4><p>Las ópticas tradicionales tienen ventaja estructural vía obras sociales y seguros médicos. Difícil competir en ese eje — B+D debe diferenciarse por diseño y experiencia.</p></div>
+  </div>
+  <div class="foda-rec"><strong>Recomendación:</strong> Reforzar la narrativa "anteojos de lectura como accesorio de moda" — separarse completamente de la percepción de "necesidad médica". Crear contenido que posicione las gafas de lectura como statement de estilo para mayores de 40.</div>
+</div>
+
+<!-- ===================== CONCEPTOS CLAVE ===================== -->
+<div id="section-conceptos" class="section">
+  <div class="section-title">Conceptos Clave</div>
+  <div class="section-subtitle">8 dimensiones evaluadas como Fortaleza · Punto Medio · Debilidad</div>
+
+  <div class="chart-card" style="margin-bottom:28px;">
+    <div class="chart-title">Scores por Dimensión</div>
+    <div style="height:280px;"><canvas id="barConceptos"></canvas></div>
+  </div>
+
+  <!-- ACORDEONES -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAcc(this)">
+      <span>🟢 1. E-commerce & Conversión</span>
+      <span class="accordion-score" style="color:var(--green)">82/100</span>
+    </div>
+    <div class="accordion-body">
+      <div class="acc-grid">
+        <div class="acc-col"><h4 style="color:var(--green)">✅ Lo que funciona</h4><ul><li>WooCommerce + Flatsome bien configurado</li><li>Sticky cart + Quick Shop activos</li><li>VWO para A/B testing continuo</li><li>ShipNow para logística eficiente</li><li>3 cuotas sin interés + 10% transferencia</li><li>Wishlist para recuperar interés futuro</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--yellow)">⚠️ Lo que no se aprovecha</h4><ul><li>Blog sin frecuencia editorial</li><li>Datos de Clarity y VWO no visibles</li><li>Sin programa de fidelización activo</li><li>Instagram Shopping no potenciado</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--red)">❌ Lo que falta</h4><ul><li>Reviews en fichas de producto</li><li>Google Shopping confirmado</li><li>Recuperación de carrito activa (Klaviyo)</li><li>Live chat o chatbot</li></ul></div>
+      </div>
+      <div class="foda-rec"><strong>Acción:</strong> Activar flujo de carrito abandonado en Klaviyo (ya instalado) — impacto estimado: +15% en recuperación de ventas perdidas.</div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAcc(this)">
+      <span>🟢 2. Identidad & Posicionamiento</span>
+      <span class="accordion-score" style="color:var(--green)">78/100</span>
+    </div>
+    <div class="accordion-body">
+      <div class="acc-grid">
+        <div class="acc-col"><h4 style="color:var(--green)">✅ Lo que funciona</h4><ul><li>Marca europea con historia (1972)</li><li>Diseño escandinavo diferenciado</li><li>Colaboración Lali Espósito</li><li>Color verde neón como sello visual</li><li>Especialista en lectura/pantallas</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--yellow)">⚠️ Lo que no se aprovecha</h4><ul><li>Historia de la marca poco narrada</li><li>Origen danés no destacado suficiente</li><li>Ketty Dalsgaard como figura fundadora</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--red)">❌ Lo que falta</h4><ul><li>Manifesto de marca visible en web</li><li>Contenido sobre sustentabilidad (si aplica)</li><li>Storytelling del proceso de diseño</li></ul></div>
+      </div>
+      <div class="foda-rec"><strong>Acción:</strong> Crear una página "Nuestra historia" con el origen danés de B+D y la visión de Ketty Dalsgaard — el storytelling de marca aumenta el tiempo en sitio y la conexión emocional.</div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAcc(this)">
+      <span>🟢 3. Email Marketing & Automatización</span>
+      <span class="accordion-score" style="color:var(--green)">75/100</span>
+    </div>
+    <div class="accordion-body">
+      <div class="acc-grid">
+        <div class="acc-col"><h4 style="color:var(--green)">✅ Lo que funciona</h4><ul><li>Klaviyo instalado (herramienta de clase mundial)</li><li>MailChimp también presente</li><li>Newsletter popup activo en el sitio</li><li>Stack de captura de leads activo</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--yellow)">⚠️ Lo que no se aprovecha</h4><ul><li>Segmentación por tipo de producto</li><li>Flujos post-compra no confirmados</li><li>Lead magnets para capturar más emails</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--red)">❌ Lo que falta</h4><ul><li>Solicitud de reseña post-compra (Klaviyo)</li><li>Flujo de winback para clientes inactivos</li><li>SMS marketing (Klaviyo lo soporta)</li></ul></div>
+      </div>
+      <div class="foda-rec"><strong>Acción:</strong> Implementar 3 flujos básicos en Klaviyo: (1) carrito abandonado, (2) solicitud de review 7 días post-compra, (3) winback 90 días sin compra.</div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAcc(this)">
+      <span>🟡 4. Presencia en Redes Sociales</span>
+      <span class="accordion-score" style="color:var(--yellow)">56/100</span>
+    </div>
+    <div class="accordion-body">
+      <div class="acc-grid">
+        <div class="acc-col"><h4 style="color:var(--green)">✅ Lo que funciona</h4><ul><li>Instagram con 107K followers activos</li><li>Colaboración Lali Espósito</li><li>IG feed integrado en el sitio web</li><li>Pixel de TikTok instalado (ads)</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--yellow)">⚠️ Lo que no se aprovecha</h4><ul><li>Facebook global sin segmento AR</li><li>UGC no sistematizado</li><li>LinkedIn sin actividad</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--red)">❌ Lo que falta</h4><ul><li>TikTok orgánico (@bplusd.ar)</li><li>Hashtag de marca propio en IG</li><li>LinkedIn activo para B2B</li><li>YouTube para contenido educativo</li></ul></div>
+      </div>
+      <div class="foda-rec"><strong>Acción:</strong> Crear cuenta TikTok @bplusd.ar y publicar 3 videos/semana con formato "estilo de vida 40+" — el nicho tiene tracción viral global.</div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAcc(this)">
+      <span>🟡 5. Estrategia de Contenido</span>
+      <span class="accordion-score" style="color:var(--yellow)">45/100</span>
+    </div>
+    <div class="accordion-body">
+      <div class="acc-grid">
+        <div class="acc-col"><h4 style="color:var(--green)">✅ Lo que funciona</h4><ul><li>Contenido visual de producto en IG</li><li>Colaboraciones con Lali</li><li>Blog existe (aunque poco activo)</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--yellow)">⚠️ Lo que no se aprovecha</h4><ul><li>Contenido educativo sobre blue light</li><li>Guías de estilo y combinación</li><li>Behind the scenes de tiendas</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--red)">❌ Lo que falta</h4><ul><li>Calendario editorial mensual</li><li>Canal YouTube confirmado</li><li>Podcasts o colaboraciones de audio</li><li>Contenido de clientes (UGC)</li></ul></div>
+      </div>
+      <div class="foda-rec"><strong>Acción:</strong> Crear calendario editorial con 3 pilares: (1) Educación visual/blue light, (2) Estilo y moda para 40+, (3) Behind the scenes y cultura de marca.</div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAcc(this)">
+      <span>🟡 6. Pauta Pagada</span>
+      <span class="accordion-score" style="color:var(--yellow)">50/100</span>
+    </div>
+    <div class="accordion-body">
+      <div class="acc-grid">
+        <div class="acc-col"><h4 style="color:var(--green)">✅ Lo que funciona</h4><ul><li>Meta Pixel bien configurado</li><li>Google Ads tag presente</li><li>TikTok Pixel instalado</li><li>GTM como contenedor centralizado</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--yellow)">⚠️ Lo que no se aprovecha</h4><ul><li>Sin datos de ROAS públicos</li><li>Google Shopping no confirmado</li><li>Dynamic ads por catálogo</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--red)">❌ Lo que falta</h4><ul><li>TikTok orgánico que baje CPM</li><li>Retargeting por abandono de carrito</li><li>Campañas de catálogo en Meta</li></ul></div>
+      </div>
+      <div class="foda-rec"><strong>Acción:</strong> Activar catálogo de productos WooCommerce en Meta para habilitar Dynamic Product Ads (DPA) — el formato de mayor ROAS en e-commerce de moda/accesorios.</div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAcc(this)">
+      <span>🟡 7. SEO & Visibilidad Orgánica</span>
+      <span class="accordion-score" style="color:var(--yellow)">55/100</span>
+    </div>
+    <div class="accordion-body">
+      <div class="acc-grid">
+        <div class="acc-col"><h4 style="color:var(--green)">✅ Lo que funciona</h4><ul><li>Schema de producto automático (WooCommerce)</li><li>SSL activo</li><li>Tienda oficial en MercadoLibre</li><li>10 GMB (optimizables)</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--yellow)">⚠️ Lo que no se aprovecha</h4><ul><li>Blog sin frecuencia regular</li><li>Keywords long-tail sin trabajar</li><li>Link building casi nulo</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--red)">❌ Lo que falta</h4><ul><li>Canal YouTube</li><li>Estrategia de contenido SEO</li><li>PR digital en medios lifestyle</li></ul></div>
+      </div>
+      <div class="foda-rec"><strong>Acción:</strong> Publicar 2 artículos/semana en el blog enfocados en búsquedas de alta intención: "anteojos de lectura +2.5", "blue light blocker argentina", "gafas lectura sin montura mujer".</div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAcc(this)">
+      <span>🟡 8. Reputación & Reviews</span>
+      <span class="accordion-score" style="color:var(--yellow)">62/100</span>
+    </div>
+    <div class="accordion-body">
+      <div class="acc-grid">
+        <div class="acc-col"><h4 style="color:var(--green)">✅ Lo que funciona</h4><ul><li>Imagen positiva en Instagram</li><li>Lali Espósito como social proof masivo</li><li>10 tiendas físicas = confianza de marca</li><li>Reviews en ML existentes</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--yellow)">⚠️ Lo que no se aprovecha</h4><ul><li>Reviews de ML no integradas al sitio</li><li>Google Reviews por tienda sin gestión</li><li>Sin testimonios en video</li></ul></div>
+        <div class="acc-col"><h4 style="color:var(--red)">❌ Lo que falta</h4><ul><li>Plugin de reviews en fichas de producto</li><li>Solicitud post-compra automatizada</li><li>Trustpilot o plataforma de reviews</li></ul></div>
+      </div>
+      <div class="foda-rec"><strong>Acción:</strong> Implementar Judge.me o Yotpo en WooCommerce + activar flujo Klaviyo de solicitud de reseña a los 7 días post-compra. Meta: 100+ reviews en 90 días.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== RECOMENDACIONES ===================== -->
+<div id="section-recomendaciones" class="section">
+  <div class="section-title">Recomendaciones Accionables</div>
+  <div class="section-subtitle">Ordenadas por Impacto · Esfuerzo · Tiempo de implementación</div>
+
+  <div class="matrix-grid">
+    <div class="matrix-cell" style="border-top:4px solid var(--green);">
+      <h3 style="color:var(--green)">⚡ Quick Wins (0-30 días)</h3>
+      <p class="meta">Alto impacto · Bajo esfuerzo</p>
+      <div class="matrix-item"><strong>1.</strong> Crear cuenta TikTok @bplusd.ar — pixel ya instalado, audiencia ya construida</div>
+      <div class="matrix-item"><strong>2.</strong> Integrar Google Reviews en product pages (+5-9% conversión estimada)</div>
+      <div class="matrix-item"><strong>3.</strong> Activar solicitud de reseña post-compra via Klaviyo (ya instalado, solo configurar)</div>
+      <div class="matrix-item"><strong>4.</strong> Optimizar 10 fichas Google My Business (fotos, horarios, respuesta a reviews)</div>
+      <div class="matrix-item"><strong>5.</strong> Activar flujo de carrito abandonado en Klaviyo</div>
+    </div>
+    <div class="matrix-cell" style="border-top:4px solid var(--yellow);">
+      <h3 style="color:var(--yellow)">📈 Mediano Plazo (1-3 meses)</h3>
+      <p class="meta">Alto impacto · Esfuerzo moderado</p>
+      <div class="matrix-item"><strong>6.</strong> Estrategia TikTok orgánico 3 videos/semana — segmento 40+ lifestyle</div>
+      <div class="matrix-item"><strong>7.</strong> Blog editorial: 2 posts/semana sobre salud visual, blue light, estilo</div>
+      <div class="matrix-item"><strong>8.</strong> LinkedIn: activar empresa AR con foco en distribuidores y ópticas B2B</div>
+      <div class="matrix-item"><strong>9.</strong> Implementar plugin de reviews en WooCommerce (Judge.me / Yotpo)</div>
+      <div class="matrix-item"><strong>10.</strong> Activar Dynamic Product Ads en Meta con catálogo WooCommerce</div>
+    </div>
+    <div class="matrix-cell" style="border-top:4px solid var(--blue);">
+      <h3 style="color:var(--blue)">🎯 Largo Plazo (3-6 meses)</h3>
+      <p class="meta">Alto impacto estratégico · Mayor esfuerzo</p>
+      <div class="matrix-item"><strong>11.</strong> Canal YouTube: tutoriales estilo, educación blue light, "cómo elegir tu graduación"</div>
+      <div class="matrix-item"><strong>12.</strong> Programa de fidelización: puntos por compra, descuento segunda compra</div>
+      <div class="matrix-item"><strong>13.</strong> Crear página Facebook Argentina específica (vs. solo global)</div>
+      <div class="matrix-item"><strong>14.</strong> PR digital: notas en medios lifestyle/moda para link building</div>
+      <div class="matrix-item"><strong>15.</strong> Campañas UGC sistematizadas con hashtag de marca en Instagram</div>
+    </div>
+    <div class="matrix-cell" style="border-top:4px solid var(--accent);">
+      <h3 style="color:var(--accent)">🔥 Diferenciadores de marca</h3>
+      <p class="meta">Posicionamiento estratégico</p>
+      <div class="matrix-item"><strong>A.</strong> Posicionar B+D como "anteojos de lectura como accesorio de moda" — alejarse de la percepción médica</div>
+      <div class="matrix-item"><strong>B.</strong> Storytelling del origen danés (1972, Ketty Dalsgaard) — diferencia de marcas sin historia</div>
+      <div class="matrix-item"><strong>C.</strong> Campaña "40+ con estilo" — propietaria, no competitiva con ópticas de seguros</div>
+      <div class="matrix-item"><strong>D.</strong> Aprovechar el verde neón (#B7FF00) como sello visual único en el mercado AR</div>
+    </div>
+  </div>
+
+  <div class="chart-card" style="margin-bottom:24px;">
+    <div class="chart-title">Roadmap Visual — 3 Fases</div>
+    <div class="roadmap">
+      <div class="road-col">
+        <h3 style="color:var(--green)">Fase 1 — Activar</h3>
+        <p class="road-meta">Meses 1-2 · Aprovechar lo que ya existe</p>
+        <div class="road-item"><div class="road-num">1</div><div class="road-text">Crear @bplusd.ar en TikTok</div></div>
+        <div class="road-item"><div class="road-num">2</div><div class="road-text">Configurar flujos Klaviyo (carrito + reviews)</div></div>
+        <div class="road-item"><div class="road-num">3</div><div class="road-text">Optimizar 10 GMB de tiendas</div></div>
+        <div class="road-item"><div class="road-num">4</div><div class="road-text">Integrar reviews en WooCommerce</div></div>
+        <div class="road-item"><div class="road-num">5</div><div class="road-text">Activar Dynamic Ads en Meta</div></div>
+      </div>
+      <div class="road-col">
+        <h3 style="color:var(--yellow)">Fase 2 — Escalar</h3>
+        <p class="road-meta">Meses 2-4 · Construcción de audiencias</p>
+        <div class="road-item"><div class="road-num y">6</div><div class="road-text">Estrategia TikTok orgánico 40+</div></div>
+        <div class="road-item"><div class="road-num y">7</div><div class="road-text">Blog 2x/semana con SEO</div></div>
+        <div class="road-item"><div class="road-num y">8</div><div class="road-text">LinkedIn B2B activo</div></div>
+        <div class="road-item"><div class="road-num y">9</div><div class="road-text">PR digital — medios lifestyle AR</div></div>
+        <div class="road-item"><div class="road-num y">10</div><div class="road-text">Campañas UGC en Instagram</div></div>
+      </div>
+      <div class="road-col">
+        <h3 style="color:var(--blue)">Fase 3 — Dominar</h3>
+        <p class="road-meta">Meses 4-6 · Liderazgo del segmento</p>
+        <div class="road-item"><div class="road-num b">11</div><div class="road-text">Canal YouTube educativo</div></div>
+        <div class="road-item"><div class="road-num b">12</div><div class="road-text">Programa de fidelización</div></div>
+        <div class="road-item"><div class="road-num b">13</div><div class="road-text">Expansión B2B vía LinkedIn</div></div>
+        <div class="road-item"><div class="road-num b">14</div><div class="road-text">Campaña "40+ con estilo" masiva</div></div>
+        <div class="road-item"><div class="road-num b">15</div><div class="road-text">Review 360° y ajuste de estrategia</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCORECARD FINAL ===================== -->
+<div id="section-scorecard" class="section">
+  <div class="section-title">Scorecard Final</div>
+  <div class="section-subtitle">Score total: 68/100 — En Crecimiento · Base Sólida</div>
+
+  <div class="grid-2" style="margin-bottom:28px;">
+    <div class="chart-card">
+      <div class="chart-title">Radar — Actual vs Potencial 90 días</div>
+      <div class="chart-wrap-tall"><canvas id="radarFinal"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Score por Dimensión (horizontal)</div>
+      <div style="height:320px;"><canvas id="barFinal"></canvas></div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:24px;">
+    <div class="score-row">
+      <div class="score-row-label">🌐 Web & E-commerce</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:82%;background:var(--green)"></div></div>
+      <div class="score-row-num" style="color:var(--green)">82/100</div>
+      <span class="badge badge-green">🟢</span>
+    </div>
+    <div class="score-row">
+      <div class="score-row-label">📧 Email Marketing</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:75%;background:var(--green)"></div></div>
+      <div class="score-row-num" style="color:var(--green)">75/100</div>
+      <span class="badge badge-green">🟢</span>
+    </div>
+    <div class="score-row">
+      <div class="score-row-label">📸 Instagram</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:78%;background:var(--green)"></div></div>
+      <div class="score-row-num" style="color:var(--green)">78/100</div>
+      <span class="badge badge-green">🟢</span>
+    </div>
+    <div class="score-row">
+      <div class="score-row-label">🎯 Identidad de Marca</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:78%;background:var(--green)"></div></div>
+      <div class="score-row-num" style="color:var(--green)">78/100</div>
+      <span class="badge badge-green">🟢</span>
+    </div>
+    <div class="score-row">
+      <div class="score-row-label">🔍 SEO & Visibilidad</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:58%;background:var(--yellow)"></div></div>
+      <div class="score-row-num" style="color:var(--yellow)">58/100</div>
+      <span class="badge badge-yellow">🟡</span>
+    </div>
+    <div class="score-row">
+      <div class="score-row-label">⭐ Reputación Online</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:62%;background:var(--yellow)"></div></div>
+      <div class="score-row-num" style="color:var(--yellow)">62/100</div>
+      <span class="badge badge-yellow">🟡</span>
+    </div>
+    <div class="score-row">
+      <div class="score-row-label">📘 Facebook (global)</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:55%;background:var(--yellow)"></div></div>
+      <div class="score-row-num" style="color:var(--yellow)">55/100</div>
+      <span class="badge badge-yellow">🟡</span>
+    </div>
+    <div class="score-row">
+      <div class="score-row-label">💰 Pauta Digital</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:50%;background:var(--yellow)"></div></div>
+      <div class="score-row-num" style="color:var(--yellow)">50/100</div>
+      <span class="badge badge-yellow">🟡</span>
+    </div>
+    <div class="score-row">
+      <div class="score-row-label">🎵 TikTok / Orgánico</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:15%;background:var(--red)"></div></div>
+      <div class="score-row-num" style="color:var(--red)">15/100</div>
+      <span class="badge badge-red">🔴</span>
+    </div>
+    <div class="score-row">
+      <div class="score-row-label">💼 LinkedIn</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:20%;background:var(--red)"></div></div>
+      <div class="score-row-num" style="color:var(--red)">20/100</div>
+      <span class="badge badge-red">🔴</span>
+    </div>
+    <div class="score-row" style="border:2px solid var(--accent);background:var(--dark);">
+      <div class="score-row-label" style="font-weight:bold;font-size:15px;">SCORE TOTAL</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:68%;background:var(--accent)"></div></div>
+      <div class="score-row-num" style="color:var(--accent);font-size:18px;">68/100</div>
+      <span class="badge" style="background:#ffe8e8;color:var(--accent)">🟡 En Crecimiento</span>
+    </div>
+  </div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:24px;margin-bottom:20px;">
+    <div class="chart-title" style="font-size:16px;">Conclusión Ejecutiva</div>
+    <p style="margin-top:14px;font-size:14px;color:var(--light);line-height:1.8;">
+      B+D Argentina tiene una <strong>base digital sólida</strong> que la diferencia claramente de sus competidores directos. El e-commerce con WooCommerce + stack tecnológico avanzado (VWO, Clarity, Klaviyo), combinado con 107K seguidores en Instagram y la colaboración con Lali Espósito, coloca a la marca en una posición privilegiada en el segmento de anteojos de lectura y pantallas.
+    </p>
+    <p style="margin-top:12px;font-size:14px;color:var(--light);line-height:1.8;">
+      Las principales <strong>oportunidades de crecimiento</strong> están en canales aún no explotados: TikTok orgánico (pixel ya instalado), LinkedIn para B2B, reviews sistematizadas en el sitio, y una estrategia de contenido SEO que capture búsquedas categóricas de alto volumen.
+    </p>
+    <p style="margin-top:12px;font-size:14px;color:var(--light);line-height:1.8;">
+      Con la ejecución del roadmap propuesto, el <strong>score potencial a 90 días es de 80-82/100</strong>, convirtiéndola en la marca digital líder indiscutida del segmento de anteojos de especialidad en Argentina.
+    </p>
+  </div>
+</div>
+
+<script>
+// NAV
+function showSection(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  el.classList.add('active');
+}
+
+// SUBTABS
+function showSubtab(section, id, el) {
+  const prefix = section + '-';
+  document.querySelectorAll('[id^="' + prefix + '"]').forEach(p => p.classList.remove('active'));
+  el.closest('.section, [id^="section"]').querySelectorAll('.subtab').forEach(t => t.classList.remove('active'));
+  document.getElementById(prefix + id).classList.add('active');
+  el.classList.add('active');
+}
+
+// ACCORDION
+function toggleAcc(header) {
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// CHARTS
+const accent = '#ff221c';
+const green = '#2e9e6b';
+const yellow = '#e6a800';
+const red = '#ff221c';
+const blue = '#1A3A6B';
+const orange = '#F5851F';
+const muted = '#aaaaaa';
+
+// Overview Radar
+new Chart(document.getElementById('radarOverview'), {
+  type: 'radar',
+  data: {
+    labels: ['Web', 'Instagram', 'Facebook', 'TikTok/Pauta', 'SEO', 'Reputación', 'Email Mktg'],
+    datasets: [{
+      label: 'B+D Argentina',
+      data: [82, 78, 55, 30, 58, 72, 75],
+      borderColor: accent,
+      backgroundColor: accent + '22',
+      pointBackgroundColor: accent,
+      pointRadius: 4
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: { r: { min: 0, max: 100, ticks: { display: false }, grid: { color: '#e0e0e0' }, pointLabels: { font: { size: 11 } } } },
+    plugins: { legend: { display: false } }
+  }
+});
+
+// Overview Bar
+new Chart(document.getElementById('barOverview'), {
+  type: 'bar',
+  data: {
+    labels: ['Web', 'Instagram', 'Email', 'Marca', 'Reputación', 'SEO', 'Facebook', 'Pauta', 'TikTok', 'LinkedIn'],
+    datasets: [{
+      data: [82, 78, 75, 78, 62, 58, 55, 50, 15, 20],
+      backgroundColor: [green, green, green, green, yellow, yellow, yellow, yellow, red, red],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { y: { min: 0, max: 100, grid: { color: '#f0f0f0' } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } }
+  }
+});
+
+// Web Bar
+new Chart(document.getElementById('barWeb'), {
+  type: 'bar',
+  data: {
+    labels: ['Mobile', 'E-commerce', 'Técnico', 'UX/UI', 'Conversión', 'Contenido'],
+    datasets: [{
+      data: [88, 82, 90, 78, 75, 55],
+      backgroundColor: [green, green, green, green, green, yellow],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { y: { min: 0, max: 100, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
+  }
+});
+
+// Web Doughnut
+new Chart(document.getElementById('doughnutWeb'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Funcionalidades activas', 'Parciales', 'Faltantes'],
+    datasets: [{ data: [75, 15, 10], backgroundColor: [green, yellow, red], borderWidth: 2, borderColor: '#fff' }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } }
+  }
+});
+
+// Social Scorecard Bar
+new Chart(document.getElementById('barSocial'), {
+  type: 'bar',
+  data: {
+    labels: ['Instagram', 'Facebook (global)', 'TikTok (ads)', 'LinkedIn'],
+    datasets: [{
+      data: [78, 55, 30, 20],
+      backgroundColor: ['#E1306C', '#1877F2', '#010101', '#0A66C2'],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { y: { min: 0, max: 100, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
+  }
+});
+
+// IG Doughnut
+new Chart(document.getElementById('doughnutIG'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Producto/lifestyle', 'Colaboraciones', 'Reels', 'Stories', 'UGC'],
+    datasets: [{ data: [40, 25, 20, 10, 5], backgroundColor: ['#E1306C', accent, orange, blue, yellow], borderWidth: 2, borderColor: '#fff' }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } }
+  }
+});
+
+// Pauta Bar
+new Chart(document.getElementById('barPauta'), {
+  type: 'bar',
+  data: {
+    labels: ['Meta Pixel', 'Google Ads', 'TikTok Pixel', 'Klaviyo Email', 'GTM', 'VWO'],
+    datasets: [{
+      label: 'Configuración (%)',
+      data: [100, 100, 100, 90, 100, 85],
+      backgroundColor: [green, blue, '#010101', orange, green, yellow],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { y: { min: 0, max: 100, grid: { color: '#f0f0f0' } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } }
+  }
+});
+
+// SEO Bar
+new Chart(document.getElementById('barSEO'), {
+  type: 'bar',
+  data: {
+    labels: ['Branded', 'MercadoLibre', 'Local (GMB)', 'Categóricas', 'Long-tail', 'Blog/Contenido'],
+    datasets: [{
+      data: [85, 70, 55, 40, 30, 35],
+      backgroundColor: [green, green, yellow, yellow, red, red],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { y: { min: 0, max: 100, grid: { color: '#f0f0f0' } }, x: { grid: { display: false }, ticks: { font: { size: 10 } } } }
+  }
+});
+
+// SEO Doughnut
+new Chart(document.getElementById('doughnutSEO'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Web propio', 'MercadoLibre', 'Marketplaces', 'Google My Business', 'Blog/Contenido'],
+    datasets: [{ data: [45, 25, 15, 10, 5], backgroundColor: [accent, orange, blue, green, yellow], borderWidth: 2, borderColor: '#fff' }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } }
+  }
+});
+
+// Competidores Radar
+new Chart(document.getElementById('radarComp'), {
+  type: 'radar',
+  data: {
+    labels: ['Social Media', 'E-commerce', 'SEO', 'Reputación', 'Precio/Valor', 'Innovación'],
+    datasets: [
+      { label: 'B+D Argentina', data: [72, 82, 58, 72, 60, 80], borderColor: accent, backgroundColor: accent + '22', pointBackgroundColor: accent, pointRadius: 3 },
+      { label: 'Ray-Ban AR', data: [90, 70, 75, 85, 40, 65], borderColor: blue, backgroundColor: blue + '22', pointBackgroundColor: blue, pointRadius: 3 },
+      { label: 'Smart Readers', data: [35, 45, 40, 55, 80, 30], borderColor: green, backgroundColor: green + '22', pointBackgroundColor: green, pointRadius: 3 },
+      { label: 'Ópticas locales', data: [40, 30, 50, 70, 85, 20], borderColor: orange, backgroundColor: orange + '22', pointBackgroundColor: orange, pointRadius: 3 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: { r: { min: 0, max: 100, ticks: { display: false }, grid: { color: '#e0e0e0' }, pointLabels: { font: { size: 10 } } } },
+    plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, boxWidth: 12 } } }
+  }
+});
+
+// Conceptos Bar
+new Chart(document.getElementById('barConceptos'), {
+  type: 'bar',
+  data: {
+    labels: ['E-commerce', 'Identidad', 'Email Mktg', 'Reputación', 'SEO', 'Pauta', 'Redes Social.', 'Contenido'],
+    datasets: [{
+      data: [82, 78, 75, 62, 55, 50, 56, 45],
+      backgroundColor: [green, green, green, yellow, yellow, yellow, yellow, yellow],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { y: { min: 0, max: 100, grid: { color: '#f0f0f0' } }, x: { grid: { display: false } } }
+  }
+});
+
+// Final Radar
+new Chart(document.getElementById('radarFinal'), {
+  type: 'radar',
+  data: {
+    labels: ['Web', 'Instagram', 'Email', 'Marca', 'SEO', 'Reputación', 'Pauta', 'TikTok'],
+    datasets: [
+      { label: 'Actual (Q1 2026)', data: [82, 78, 75, 78, 58, 62, 50, 15], borderColor: accent, backgroundColor: accent + '22', pointBackgroundColor: accent, pointRadius: 4 },
+      { label: 'Potencial 90 días', data: [88, 82, 82, 80, 68, 78, 65, 60], borderColor: blue, backgroundColor: blue + '11', borderDash: [5,3], pointBackgroundColor: blue, pointRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: { r: { min: 0, max: 100, ticks: { display: false }, grid: { color: '#e0e0e0' }, pointLabels: { font: { size: 10 } } } },
+    plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, boxWidth: 12 } } }
+  }
+});
+
+// Final Bar (horizontal)
+new Chart(document.getElementById('barFinal'), {
+  type: 'bar',
+  data: {
+    labels: ['Web', 'Instagram', 'Email', 'Marca', 'Reputación', 'SEO', 'Facebook', 'Pauta', 'LinkedIn', 'TikTok'],
+    datasets: [{
+      data: [82, 78, 75, 78, 62, 58, 55, 50, 20, 15],
+      backgroundColor: [green, green, green, green, yellow, yellow, yellow, yellow, red, red],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: { x: { min: 0, max: 100, grid: { color: '#f0f0f0' } }, y: { grid: { display: false }, ticks: { font: { size: 11 } } } }
+  }
+});
+</script>
+</body>
+</html>
